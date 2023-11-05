@@ -7,22 +7,10 @@ import Home from './components/Home/Home.jsx'
 import About from './components/About/About.jsx'
 import CreateQuiz from './components/CreateQuiz/CreateQuiz.jsx'
 import QuestionsCreate from './components/CreateQuiz/QuestionsCreate.jsx'
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <Layout />,
-//     children: [
-//       {
-//       path: "",
-//       element: <Home/>
-//     },
-//     {
-//       path: "about",
-//       element: <About/>
-//     }
-//     ]
-//   }
-// ])
+import QuizCreatedFinalPage from './components/CreateQuiz/QuizCreatedFinalPage.jsx'
+import AttendQuizDetails from './components/AttendQuiz/AttendQuizDetails.jsx'
+import AttendQuiz from './components/AttendQuiz/AttendQuiz.jsx'
+import ViewQuestions from './components/AttendQuiz/ViewQuestions.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +20,10 @@ const router = createBrowserRouter(
         <Route path="/about" element={<About />} />
         <Route path="/createQuiz" element={<CreateQuiz />} />
         <Route path="/createQuiz/:id" element={<QuestionsCreate />} />
+        <Route path="/createQuiz/:id/complete" element={<QuizCreatedFinalPage />} />
+        <Route path="/attendQuiz" element={<AttendQuiz />} />
+        <Route path="/attendQuiz/:id" element={<AttendQuizDetails />} />
+        <Route path="/attendQuiz/:id/view" element={<ViewQuestions />} />
       </Route>
     </Route>
   )

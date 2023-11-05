@@ -3,10 +3,11 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function QuestionsCreate() {
+    const { id } = useParams();
     const [questions, setQuestions] = useState([]);
 
     const addQuestion = () => {
-        setQuestions([...questions, { question: "", type: "subjective", options: [] }]);
+        setQuestions([...questions, { question: "", typeQ: "subjective", options: [] }]);
     };
 
     const updateQuestion = (index, field, value) => {
@@ -22,19 +23,15 @@ export default function QuestionsCreate() {
     };
 
     const handleSubmitQuestions = () => {
-        const quizId = useParams().id;
-        fetch(`/api/quiz/${quizId}/questions`, {
+
+        fetch(`http://localhost:5000/createQuiz/${id}/questions`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(questions),
         })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-
-            });
+            .then((res) => window.location.href = res.url)
     }
     return (
         <div className="text-black p-4 flex flex-col justify-center">
@@ -63,8 +60,8 @@ export default function QuestionsCreate() {
                             <input
                                 type="radio"
                                 value="subjective"
-                                checked={question.type === "subjective"}
-                                onChange={(e) => updateQuestion(index, "type", e.target.value)}
+                                checked={question.typeQ === "subjective"}
+                                onChange={(e) => updateQuestion(index, "typeQ", e.target.value)}
                                 className="form-radio h-5 w-5 text-gray-600"
                             />
                             <span className="ml-2 text-black">Subjective</span>
@@ -73,14 +70,14 @@ export default function QuestionsCreate() {
                             <input
                                 type="radio"
                                 value="mcq"
-                                checked={question.type === "mcq"}
-                                onChange={(e) => updateQuestion(index, "type", e.target.value)}
+                                checked={question.typeQ === "mcq"}
+                                onChange={(e) => updateQuestion(index, "typeQ", e.target.value)}
                                 className="form-radio h-5 w-5 text-gray-600"
                             />
                             <span className="ml-2 text-black">MCQ</span>
                         </label>
                     </label>
-                    {question.type === "mcq" && (
+                    {question.typeQ === "mcq" && (
                         <div>
                             <label className="block mb-2">
                                 Option 1:
@@ -131,7 +128,7 @@ export default function QuestionsCreate() {
                     Add question
                 </button>
             </div>
-            <button onClick={addQuestion} className="bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-500 hover:font-bold w-2/12">
+            <button onClick={handleSubmitQuestions} className="bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-500 hover:font-bold w-2/12">
                 Submit
             </button>
         </div>

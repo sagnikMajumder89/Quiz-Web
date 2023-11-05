@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const intializeQuizData = () => {
-    return { 'id': crypto.randomUUID(), 'name': '', 'description': '', 'duration': 10, 'date': '', 'time': '' };
+    return { 'name': '', 'description': '', 'duration': 10, 'date': '', 'time': '' };
 }
 
 export default function CreateQuiz() {

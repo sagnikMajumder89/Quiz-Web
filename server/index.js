@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const createQuiz = require("./routes/createQuiz");
+const attendQuiz = require("./routes/attendQuiz");
 
 const port = 5000;
 
@@ -21,13 +23,9 @@ dbConnection.once("open", () => {
 app.use(express.json());
 app.use(cors());
 
-app.post("/createQuiz", (req, res) => {
-  console.log(req.body);
-
-  res.json({
-    redirect: "/about",
-  });
-});
+//routes
+app.use("/createQuiz", createQuiz);
+app.use("/attendQuiz", attendQuiz);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
