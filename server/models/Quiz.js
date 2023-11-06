@@ -12,6 +12,7 @@ const createQuizSchema = new Schema({
       question: String,
       typeQ: String,
       options: Array,
+      correctAnswer: String,
     },
   ],
 });

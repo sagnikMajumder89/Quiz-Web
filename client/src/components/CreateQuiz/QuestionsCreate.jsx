@@ -7,7 +7,7 @@ export default function QuestionsCreate() {
     const [questions, setQuestions] = useState([]);
 
     const addQuestion = () => {
-        setQuestions([...questions, { question: "", typeQ: "subjective", options: [] }]);
+        setQuestions([...questions, { question: "", typeQ: "mcq", options: [], correctAnswer: null }]);
     };
 
     const updateQuestion = (index, field, value) => {
@@ -22,8 +22,13 @@ export default function QuestionsCreate() {
         setQuestions(updatedQuestions);
     };
 
-    const handleSubmitQuestions = () => {
+    const updateCorrectAnswer = (questionIndex, optionIndex) => {
+        const updatedQuestions = [...questions];
+        updatedQuestions[questionIndex].correctAnswer = optionIndex;
+        setQuestions(updatedQuestions);
+    };
 
+    const handleSubmitQuestions = () => {
         fetch(`http://localhost:5000/createQuiz/${id}/questions`, {
             method: "POST",
             headers: {
@@ -31,8 +36,9 @@ export default function QuestionsCreate() {
             },
             body: JSON.stringify(questions),
         })
-            .then((res) => window.location.href = res.url)
-    }
+            .then((res) => (window.location.href = res.url));
+    };
+
     return (
         <div className="text-black p-4 flex flex-col justify-center">
             <h1 className="text-3xl font-bold mb-4 flex justify-center">Create your questions</h1>
@@ -87,6 +93,12 @@ export default function QuestionsCreate() {
                                     onChange={(e) => updateOption(index, 0, e.target.value)}
                                     className="block w-full rounded-md border-gray-300 bg-white text-gray-900 py-2 px-3 mt-1 mb-2"
                                 />
+                                <input
+                                    type="radio"
+                                    checked={question.correctAnswer === 0}
+                                    onChange={() => updateCorrectAnswer(index, 0)}
+                                    className="ml-2"
+                                />
                             </label>
                             <br />
                             <label className="block mb-2">
@@ -96,6 +108,12 @@ export default function QuestionsCreate() {
                                     value={question.options[1] || ""}
                                     onChange={(e) => updateOption(index, 1, e.target.value)}
                                     className="block w-full rounded-md border-gray-300 bg-white text-gray-900 py-2 px-3 mt-1 mb-2"
+                                />
+                                <input
+                                    type="radio"
+                                    checked={question.correctAnswer === 1}
+                                    onChange={() => updateCorrectAnswer(index, 1)}
+                                    className="ml-2"
                                 />
                             </label>
                             <br />
@@ -107,6 +125,12 @@ export default function QuestionsCreate() {
                                     onChange={(e) => updateOption(index, 2, e.target.value)}
                                     className="block w-full rounded-md border-gray-300 bg-white text-gray-900 py-2 px-3 mt-1 mb-2"
                                 />
+                                <input
+                                    type="radio"
+                                    checked={question.correctAnswer === 2}
+                                    onChange={() => updateCorrectAnswer(index, 2)}
+                                    className="ml-2"
+                                />
                             </label>
                             <br />
                             <label className="block mb-2">
@@ -116,6 +140,12 @@ export default function QuestionsCreate() {
                                     value={question.options[3] || ""}
                                     onChange={(e) => updateOption(index, 3, e.target.value)}
                                     className="block w-full rounded-md border-gray-300 bg-white text-gray-900 py-2 px-3 mt-1 mb-2"
+                                />
+                                <input
+                                    type="radio"
+                                    checked={question.correctAnswer === 3}
+                                    onChange={() => updateCorrectAnswer(index, 3)}
+                                    className="ml-2"
                                 />
                             </label>
                             <br />

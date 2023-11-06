@@ -16,7 +16,19 @@ router.route("/").post(async (req, res) => {
 
 router.route("/:id/questions").post(async (req, res) => {
   const quiz = await Quiz.findById(req.params.id);
-  quiz.questions = [...quiz.questions, ...req.body];
+  const questions = req.body;
+
+  const transformedQuestions = questions.map((q) => {
+    return {
+      question: q.question,
+      typeQ: q.typeQ,
+      options: q.options,
+      correctAnswer: q.options[q.correctAnswer],
+    };
+  });
+
+  for (let i = 0; i < questions.length; i++) {}
+  quiz.questions = [...quiz.questions, ...transformedQuestions];
   await quiz.save();
   res.redirect(`http://localhost:3000/createQuiz/${req.params.id}/complete`);
 });

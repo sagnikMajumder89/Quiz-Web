@@ -16,4 +16,19 @@ router.route("/getQuiz/:id").get((req, res) => {
     });
 });
 
+router.route("/:id").post(async (req, res) => {
+  const { id } = req.params;
+  var score = 0;
+  const quizAnswersReceived = req.body;
+  console.log(quizAnswersReceived);
+  const quiz = await Quiz.findById(id);
+  console.log(quiz);
+  for (let i = 0; i < quizAnswersReceived.length; i++) {
+    if (quiz.questions[i].correctAnswer === quizAnswersReceived[i]) {
+      score += 1;
+    }
+  }
+  res.json({ Score: score });
+});
+
 module.exports = router;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 
 function AttendQuizDetails() {
@@ -25,7 +25,7 @@ function AttendQuizDetails() {
                     <p className="text-lg mb-2">{quizDetails.description}</p>
                     <p className="text-lg mb-2">Duration: {quizDetails.duration}</p>
                     <p className="text-lg mb-4">Number of Questions: {quizDetails.questions.length}</p>
-                    <button className="bg-white text-orange-700 py-2 px-4 rounded-lg">Attend Quiz</button>
+                    <Link to={`/attendQuiz/${id}/view`} className="bg-white text-orange-700 py-2 px-4 rounded-lg">Attend Quiz</Link>
                 </>
             )}
         </div>

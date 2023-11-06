@@ -11,6 +11,7 @@ import QuizCreatedFinalPage from './components/CreateQuiz/QuizCreatedFinalPage.j
 import AttendQuizDetails from './components/AttendQuiz/AttendQuizDetails.jsx'
 import AttendQuiz from './components/AttendQuiz/AttendQuiz.jsx'
 import ViewQuestions from './components/AttendQuiz/ViewQuestions.jsx'
+import AfterSubmit from './components/AttendQuiz/AfterSubmit.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
         <Route path="/attendQuiz" element={<AttendQuiz />} />
         <Route path="/attendQuiz/:id" element={<AttendQuizDetails />} />
         <Route path="/attendQuiz/:id/view" element={<ViewQuestions />} />
+        <Route path="/attendQuiz/:id/complete" element={<AfterSubmit />} />
       </Route>
     </Route>
   )
