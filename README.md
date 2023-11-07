@@ -18,9 +18,21 @@ Please note that this project is still under active development, and we're const
    - Description: Get the quiz data and receive a JSON response with a redirect parameter containing the URL to your newly created quiz.
 
 2. Create Quiz Questions
+
    - Endpoint: /createQuiz/:id/questions
    - Method: POST
    - Description: Allows users to add questions to their quizzes and receive a redirect URL upon completion.
+
+3. Get Quiz Details
+
+   - Endpoint: /attendQuiz/getQuiz/:id
+   - Method: GET
+   - Description: Allows users to get basic details of the quiz & also the questions.
+
+4. Get Result
+   - Endpoint: /attendQuiz/:id
+   - Method: POST
+   - Description: Allows users to get the result of the quiz.
 
 ## Getting Started
 
