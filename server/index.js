@@ -1,9 +1,11 @@
+const dotenv = require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const createQuiz = require("./routes/createQuiz");
 const attendQuiz = require("./routes/attendQuiz");
+const auth = require("./routes/auth");
 
 const port = 5000;
 
@@ -26,6 +28,7 @@ app.use(cors());
 //routes
 app.use("/createQuiz", createQuiz);
 app.use("/attendQuiz", attendQuiz);
+app.use("/auth", auth);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
