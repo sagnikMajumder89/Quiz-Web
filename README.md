@@ -30,9 +30,22 @@ Please note that this project is still under active development, and we're const
    - Description: Allows users to get basic details of the quiz & also the questions.
 
 4. Get Result
+
    - Endpoint: /attendQuiz/:id
    - Method: POST
    - Description: Allows users to get the result of the quiz.
+
+5. Login
+
+   - Endpoint: /auth/login
+   - Method: POST
+   - Description: Allows users to login.
+
+6. SignUp
+
+   - Endpoint: /auth/register
+   - Method: POST
+   - Description: Allows users to signup.
 
 ## Getting Started
 
