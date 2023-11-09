@@ -1,6 +1,7 @@
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 function SignUp() {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,9 +17,19 @@ function SignUp() {
                 },
                 body: JSON.stringify({ name, email, password }),
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (response.status === 201) {
+                    }
+                    return response.json();
+                    console.log(response.json());
+                    // throw new Error('Registration failed');
+                }
+                )
                 .then((data) => {
-                    console.log(data)
+                    console.log(data);
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    navigate('/');
                 })
                 .catch((error) => {
                     console.error('Error:', error);

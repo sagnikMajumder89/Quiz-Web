@@ -1,9 +1,15 @@
 
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const flashMessage = location.state?.flashMessage;
+    const from = location.state?.from || '/';
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -21,12 +27,19 @@ function Login() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('token'),
             },
             body: JSON.stringify({ email, password }),
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (response.status === 201) return response.json();
+                throw new Error('Login failed');
+
+            })
             .then((data) => {
-                console.log(data)
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -35,6 +48,9 @@ function Login() {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
+            <div>
+                <h2>You need to login</h2>
+            </div>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Email:</label>

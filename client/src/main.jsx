@@ -15,6 +15,7 @@ import AfterSubmit from './components/AttendQuiz/AfterSubmit.jsx'
 import SignUp from './components/Authentication/SignUp.jsx'
 import Login from './components/Authentication/Login.jsx'
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -29,7 +30,7 @@ const router = createBrowserRouter(
         <Route path="/attendQuiz/:id/view" element={<ViewQuestions />} />
         <Route path="/attendQuiz/:id/complete" element={<AfterSubmit />} />
         <Route path="/auth/register" element={<SignUp />} />
-        <Route path="auth/login" element={<Login />} />
+        <Route path="/auth/login" element={<Login />} />
       </Route>
     </Route>
   )

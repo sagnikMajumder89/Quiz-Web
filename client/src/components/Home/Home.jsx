@@ -1,14 +1,18 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
 export default function Home() {
-        const [username, setUsername] = useState('Sagnik');
+        const [username, setUsername] = useState('User');
 
-        const handleUsernameChange = (event) => {
-                setUsername(event.target.value);
-        };
+        useEffect(() => {
+                const user = JSON.parse(localStorage.getItem("user"));
+                console.log(user);
+                if (user && user.name) {
+                        setUsername(user.name);
+                }
+        }, [])
 
         return (
                 <>
@@ -28,15 +32,7 @@ export default function Home() {
                                                 Attend Quiz
                                         </Link>
                                 </div>
-                                <div className="mt-4">
-                                        <input
-                                                type="text"
-                                                placeholder="Enter your name"
-                                                value={username}
-                                                onChange={handleUsernameChange}
-                                                className="border border-gray-400 rounded py-2 px-4"
-                                        />
-                                </div>
+
                         </div>
                 </>
         );

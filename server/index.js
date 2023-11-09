@@ -6,6 +6,7 @@ const cors = require("cors");
 const createQuiz = require("./routes/createQuiz");
 const attendQuiz = require("./routes/attendQuiz");
 const auth = require("./routes/auth");
+const { isLoggedIn } = require("./middleware");
 
 const port = 5000;
 
@@ -24,6 +25,7 @@ dbConnection.once("open", () => {
 //middleware
 app.use(express.json());
 app.use(cors());
+app.use(isLoggedIn);
 
 //routes
 app.use("/createQuiz", createQuiz);

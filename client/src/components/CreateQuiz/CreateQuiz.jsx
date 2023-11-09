@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const intializeQuizData = () => {
     return { 'name': '', 'description': '', 'duration': 10, 'date': '', 'time': '' };
 }
 
 export default function CreateQuiz() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/auth/login', { state: { from: location.pathname, flashMessage: 'Please login to continue' } });
+        }
+    }, [])
 
     const [quiz, setQuiz] = useState(intializeQuizData);
 
